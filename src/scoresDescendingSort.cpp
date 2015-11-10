@@ -20,6 +20,43 @@ struct student {
 	int score;
 };
 
-void * scoresDescendingSort(struct student *students, int len) {
-	return NULL;
+void copy(char *des, char *soc)
+{
+	int temp = 0;
+
+	while (soc[temp] != '\0')
+	{
+		des[temp] = soc[temp];
+		temp++;
+	}
+	des[temp] = '\0';
+}
+
+void * scoresDescendingSort(struct student *students, int len)
+{
+	if (students[0].name == '\0')
+		return NULL;
+
+	if (len < 0)
+		return NULL;
+
+	int i, j;
+	int temp;
+	char name1[10];
+	for (i = 0; i < len; i++)
+	{
+		for (j = 0; j < (len - i - 1); j++)
+		{
+			if (students[j].score < students[j + 1].score)
+			{
+				copy(name1, students[j].name);
+				temp = students[j].score;
+				copy(students[j].name, students[j + 1].name);
+				students[j].score = students[j + 1].score;
+				copy(students[j + 1].name, name1);
+				students[j + 1].score = temp;
+			}
+		}
+	}
+
 }

@@ -18,10 +18,9 @@ void * removeArrayDuplicates(int *Arr, int len)
 	if (Arr == NULL)
 		return NULL;
 
-	int length = sizeof(Arr) / sizeof(int);
+	if (len < 0)
+		return NULL;
 	
-	if (length == len)
-	{
 		int i, j;
 
 		int templen = 1;
@@ -42,7 +41,5 @@ void * removeArrayDuplicates(int *Arr, int len)
 
 		for (i = 0; i < templen; i++)
 			printf(" %d", Arr[i]);
-	}
-	else 
-	return NULL;
+
 }
