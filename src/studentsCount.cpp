@@ -15,6 +15,95 @@ NOTES:
 
 #include <stdio.h>
 
-void * studentsCount(int *Arr, int len, int score, int *lessCount, int *moreCount) {
+int removearray(int *Arr, int len)
+{
+	int i, j;
+
+	int templen = 1;
+
+	for (i = 1; i < len; i++)
+	{
+
+		for (j = 0; j < templen; j++)
+		{
+
+			if (Arr[i] == Arr[j])
+				break;
+		}
+
+		if (j == templen)
+			Arr[templen++] = Arr[i];
+
+	}
+	return templen;
+}
+
+void * studentsCount(int *Arr, int len, int score, int *lessCount, int *moreCount)
+{
+	if (Arr == NULL)
+		return NULL;
+
+	if (len < 0)
+		return NULL;
+
+	int length = removearray(Arr, len);
+
+	if (length == 1 && score == Arr[0])
+	{
+		*lessCount = 0;
+		*moreCount = 0;
+		return NULL;
+	}
+	else if (length == 1 && score > Arr[0])
+	{
+		*lessCount = 1;
+		*moreCount = 0;
+		return NULL;
+	}
+	else if (length == 1 && score < Arr[0])
+	{
+		*lessCount = 0;
+		*moreCount = 1;
+		return NULL;
+	}
+
+	int index = 0, temp = 0;
+	int final_index;
+	int tempvar = score;
+
+	do
+	{
+		while ((index + temp) < length && Arr[index + temp] < tempvar)
+			index = (index * 2) + 1;
+
+		temp = temp + (index / 2);
+
+		index = 0;
+
+		if (temp == length - 1)
+		{
+			final_index = temp;
+			break;
+		}
+		if (Arr[temp] == tempvar  &&  temp <= length || (Arr[temp] < tempvar && Arr[temp + 1] >= tempvar))
+		{
+			final_index = temp;
+			break;
+		}
+
+
+	} while (Arr[temp] < tempvar  && temp <= length);
+
+	length--;
+	if (Arr[final_index] == tempvar)
+		*lessCount = final_index;
+	else
+		*lessCount = final_index + 1;
+
+	if (Arr[final_index + 1] == tempvar)
+		*moreCount = length - final_index - 1;
+	else
+		*moreCount = length - final_index;
+
 	return NULL;
 }

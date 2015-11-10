@@ -15,5 +15,34 @@ NOTES: Don't create new array, try to change the input array.
 
 void * removeArrayDuplicates(int *Arr, int len)
 {
+	if (Arr == NULL)
+		return NULL;
+
+	int length = sizeof(Arr) / sizeof(int);
+	
+	if (length == len)
+	{
+		int i, j;
+
+		int templen = 1;
+
+		for (i = 1; i < len; i++)
+		{
+
+			for (j = 0; j < templen; j++)
+			{
+
+				if (Arr[i] == Arr[j])
+					break;
+			}
+
+			if (j == templen)
+				Arr[templen++] = Arr[i];
+		}
+
+		for (i = 0; i < templen; i++)
+			printf(" %d", Arr[i]);
+	}
+	else 
 	return NULL;
 }
