@@ -15,7 +15,7 @@ NOTES:
 
 #include <stdio.h>
 
-int removearray(int *Arr, int len)
+int removeduparray(int *Arr, int len)
 {
 	int i, j;
 
@@ -46,7 +46,7 @@ void * studentsCount(int *Arr, int len, int score, int *lessCount, int *moreCoun
 	if (len < 0)
 		return NULL;
 
-	int length = removearray(Arr, len);
+	int length = removeduparray(Arr, len);
 
 	if (length == 1 && score == Arr[0])
 	{
